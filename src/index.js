@@ -3,8 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const initialState = {
+  counter: 0
+}
+
+function rootReducer(state = initialState, action) {
+  if(action.type === "INCREMENT") {
+    return {
+      counter: state.counter + 1
+    }
+  }
+  return state
+}
+
+let store = createStore(rootReducer)
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
