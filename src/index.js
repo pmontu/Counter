@@ -7,13 +7,15 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 const initialState = {
-  counter: 0
+  counter1: 0,
+  counter2: 0
 }
 
 function rootReducer(state = initialState, action) {
   if(action.type === "INCREMENT") {
     return {
-      counter: state.counter + 1
+      ...state,
+      ["counter" + action.id]: state["counter" + action.id] + 1
     }
   }
   return state
